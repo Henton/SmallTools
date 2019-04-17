@@ -90,4 +90,18 @@ public class TimeUtil {
         return result;
     }
 
+    /**
+     * 获取两个时间戳之间经过了几周（自然周）
+     *
+     * @param oldTime
+     * @param newTime
+     * @return
+     */
+    public static int getCrossWeeks(long oldTime, long newTime) {
+        DateTime dateTime = new DateTime(oldTime);
+        DateTime withMillisOfDay = dateTime.withDayOfWeek(1).withMillisOfDay(0);
+        long millis = withMillisOfDay.getMillis();
+        return (int) ((newTime - millis) / WEEK);
+    }
+
 }
