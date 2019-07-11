@@ -17,14 +17,9 @@ public class TimeUtil {
 
     /**
      * 获取两个时间戳之间经过了几个时间点（时间点为周几几点）
-     * 
-     * @param oldTime
-     * @param nowTime
-     * @param day
-     * @param hours
-     * @return
      */
-    public static int getResetTimes(long oldTime, long nowTime, Set<Integer> day, Set<Integer> hours) {
+    public static int getResetTimes(long oldTime, long nowTime, Set<Integer> day,
+            Set<Integer> hours) {
         long crossMs = nowTime - oldTime;
         if (crossMs <= 0) {
             return 0;
@@ -47,13 +42,13 @@ public class TimeUtil {
         // 不是同一天则追到同一天并累计时间点个数（因不一定每天都包含时间点，因此需要循环判断）
         while (i != j) {
             if (day.contains(i)) {
-                if(i == originI){
+                if (i == originI) {
                     for (int temp = k + 1; temp < 24; ++temp) {
                         if (hours.contains(temp)) {
                             result = result + 1;
                         }
                     }
-                }else {
+                } else {
                     result += hours.size();
                 }
             }
@@ -97,10 +92,6 @@ public class TimeUtil {
 
     /**
      * 获取两个时间戳之间经过了几周（自然周）
-     *
-     * @param oldTime
-     * @param newTime
-     * @return
      */
     public static int getCrossWeeks(long oldTime, long newTime) {
         DateTime dateTime = new DateTime(oldTime);

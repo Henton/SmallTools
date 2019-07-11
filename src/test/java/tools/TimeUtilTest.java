@@ -8,7 +8,7 @@ import org.junit.Test;
 public class TimeUtilTest {
 
     @Test
-    public void testGetResetTimes(){
+    public void testGetResetTimes() {
         // 周一
         HashSet<Integer> day = new HashSet(Arrays.asList(1));
         // 五点
@@ -46,6 +46,19 @@ public class TimeUtilTest {
         // 2019-02-18 05:00:00 周一  2019-02-18 05:30:00 周一
         resetTimes = TimeUtil.getResetTimes(1550437200000L, 1550439000000L, day, hours);
         Assert.assertEquals(resetTimes, 0);
+    }
+
+    @Test
+    public void testGetCrossWeeks() {
+        // 2019-07-11 15:33:36 周四  2019-07-14 15:33:36 周日
+        int crossWeeks = TimeUtil.getCrossWeeks(1562830416000L, 1563089616000L);
+        Assert.assertEquals(crossWeeks, 0);
+        // 2019-07-11 15:33:36 周四  2019-07-15 15:33:36 周一
+        crossWeeks = TimeUtil.getCrossWeeks(1562830416000L, 1563176016000L);
+        Assert.assertEquals(crossWeeks, 1);
+        // 2019-07-11 15:33:36 周四  2019-07-22 15:33:36 周一
+        crossWeeks = TimeUtil.getCrossWeeks(1562830416000L, 1563780816000L);
+        Assert.assertEquals(crossWeeks, 2);
     }
 
 }
