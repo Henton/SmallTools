@@ -41,7 +41,7 @@ public class TimeUtil {
         // 跨过了多少个24小时
         int crossDays = (int) (crossMs / DAY);
         // 跨过了多少周，若oldTime和nowTime同一天（如同是周一、周二）且oldTime的当前小时数大于nowTime则周数加一方便计算，后面进行修正
-        int crossWeeks = ((i == j && k >= l && crossMs >= HOUR) ? crossDays / 7 + 1 : crossDays / 7);
+        int crossWeeks = ((i == j && k >= l && crossDays > 0) ? crossDays / 7 + 1 : crossDays / 7);
         // 根据跨过多少周计算有多少个指定时间点（周几几点）,因为是经过了7*24小时，因此不要考虑是周几几点，每周必定会有day.size() * hours.size()个时间点
         result += crossWeeks * day.size() * hours.size();
         // 不是同一天则追到同一天并累计时间点个数（因不一定每天都包含时间点，因此需要循环判断）
